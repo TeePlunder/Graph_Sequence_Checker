@@ -48,7 +48,7 @@ function decreaseSequence(sequence: number[], count: number): number[] {
         sequence[i] = reducedElement
     }
     console.log(`${chalk.underline.red("Numbers")} will be decreased by ${chalk.red(decreaseValue)}.\n${chalk.green("Numbers")} will not be changed.
-    => (${chalk.underline.red(changesNumbers)},${chalk.green(untouchedNumbers)})`);
+    => (${chalk.underline.red(changesNumbers)}${untouchedNumbers.length > 0 ? ",": ""}${chalk.green(untouchedNumbers)})`);
 
     console.log(chalk.bgGray("Start decreasing"));
     console.log(`Add untouched ${chalk.green("numbers")} at the and of sequence`);
@@ -74,7 +74,6 @@ function transformInput(input: string): number[] {
         }
         sequence.push(convertedInput)
     })
-
     return sequence
 }
 
@@ -83,7 +82,7 @@ let readInput = readline.createInterface({
     output: process.stdout
 })
 
-readInput.question("your graph sequence (please separate your numbers with a comma. e.g.: '1,2,3') => ", (sequence) => {
+readInput.question(`Your graph sequence (please separate your numbers with a comma. e.g.: '1,2,3' & ${chalk.red("no")} comma at the end!) => `, (sequence) => {
     const toCheckSequence = transformInput(sequence)
     const startTime = performance.now()
 
