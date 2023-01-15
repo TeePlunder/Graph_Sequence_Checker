@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import * as readline from 'readline';
 
 function check(sequence: number[]) {
     let sortedSequence = sortSequence(sequence)
@@ -63,11 +64,35 @@ function sortSequence(sequence: number[]): number[] {
     return sequence.sort((a, b) => b - a)
 }
 
-const startTime = performance.now()
+function transformInput(input: string): number[] {
+    let sequence: number[] = [];
+    const inputValues = input.split(",")
+    inputValues.forEach((input) => {
+        const convertedInput = Number(input)
+        if(Number.isNaN(convertedInput)){
+           throw new TypeError(`${input} is not a number. Only numbers are allowed!`)
+        }
+        sequence.push(convertedInput)
+    })
 
-check([1,4,3,2,4,5,1,2,2,2,3,3,2]);
+    return sequence
+}
 
-const endTime = performance.now()
+let readInput = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
 
-const duration = endTime - startTime;
-console.log(chalk.gray(`\nCall to graph sequence checker took ${Math.round((duration + Number.EPSILON) * 100) / 100} milliseconds`))
+readInput.question("your graph sequence (please separate your numbers with a comma. e.g.: '1,2,3') => ", (sequence) => {
+    const toCheckSequence = transformInput(sequence)
+    const startTime = performance.now()
+
+    check(toCheckSequence);
+
+    const endTime = performance.now()
+
+    const duration = endTime - startTime;
+    console.log(chalk.gray(`\nCall to graph sequence checker took ${Math.round((duration + Number.EPSILON) * 100) / 100} milliseconds`))
+    readInput.close()
+})
+
