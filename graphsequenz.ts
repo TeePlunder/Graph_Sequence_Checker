@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import * as readline from 'readline';
 
 function check(sequence: number[]) {
     let sortedSequence = sortSequence(sequence)
@@ -47,7 +48,7 @@ function decreaseSequence(sequence: number[], count: number): number[] {
         sequence[i] = reducedElement
     }
     console.log(`${chalk.underline.red("Numbers")} will be decreased by ${chalk.red(decreaseValue)}.\n${chalk.green("Numbers")} will not be changed.
-    => (${chalk.underline.red(changesNumbers)},${chalk.green(untouchedNumbers)})`);
+    => (${chalk.underline.red(changesNumbers)}${untouchedNumbers.length > 0 ? ",": ""}${chalk.green(untouchedNumbers)})`);
 
     console.log(chalk.bgGray("Start decreasing"));
     console.log(`Add untouched ${chalk.green("numbers")} at the and of sequence`);
@@ -63,11 +64,34 @@ function sortSequence(sequence: number[]): number[] {
     return sequence.sort((a, b) => b - a)
 }
 
-const startTime = performance.now()
+function transformInput(input: string): number[] {
+    let sequence: number[] = [];
+    const inputValues = input.split(",")
+    inputValues.forEach((input) => {
+        const convertedInput = Number(input)
+        if(Number.isNaN(convertedInput)){
+           throw new TypeError(`${input} is not a number. Only numbers are allowed!`)
+        }
+        sequence.push(convertedInput)
+    })
+    return sequence
+}
 
-check([1,4,3,2,4,5,1,2,2,2,3,3,2]);
+let readInput = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+})
 
-const endTime = performance.now()
+readInput.question(`Your graph sequence (please separate your numbers with a comma. e.g.: '1,2,3' & ${chalk.red("no")} comma at the end!) => `, (sequence) => {
+    const toCheckSequence = transformInput(sequence)
+    const startTime = performance.now()
 
-const duration = endTime - startTime;
-console.log(chalk.gray(`\nCall to graph sequence checker took ${Math.round((duration + Number.EPSILON) * 100) / 100} milliseconds`))
+    check(toCheckSequence);
+
+    const endTime = performance.now()
+
+    const duration = endTime - startTime;
+    console.log(chalk.gray(`\nCall to graph sequence checker took ${Math.round((duration + Number.EPSILON) * 100) / 100} milliseconds`))
+    readInput.close()
+})
+
