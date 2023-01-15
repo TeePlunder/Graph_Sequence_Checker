@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/graphsequenz.iml" filepath="$PROJECT_DIR$/.idea/graphsequenz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Graph_Sequence_Checker.iml" filepath="$PROJECT_DIR$/.idea/Graph_Sequence_Checker.iml" />
     </modules>
   </component>
 </project>
