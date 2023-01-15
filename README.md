@@ -9,7 +9,7 @@ You can run the project in Stackblitz or run it locally:
 
 **Stackblitz**
 
-[//]: # ([Stackblitz]&#40;https://dev.to/chilupa/import-github-repos-to-stackblitz-codesandbox-in-seconds-48g2&#41;) 
+- open => [Stackblitz](https://stackblitz.com/github/TeePlunder/Graph_Sequence_Checker) 
 
 **Locally**
 
