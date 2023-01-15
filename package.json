@@ -5,5 +5,8 @@
   },
   "scripts": {
     "start": "npx ts-node graphsequenz.ts"
+  },
+  "dependencies": {
+    "chalk": "^5.2.0"
   }
 }
