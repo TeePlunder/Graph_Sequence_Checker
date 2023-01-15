@@ -1,7 +1,7 @@
-import { log } from "console";
+import chalk from "chalk";
 
 function check(sequenz: number[]) {
-    let iterationsWhereSuccessful = false;
+    console.log(chalk.blue('Hello world!'));
     let sortedSequenz = sortSequenz(sequenz)
     const originalArray = sortedSequenz.slice()
 
@@ -25,6 +25,7 @@ function check(sequenz: number[]) {
         console.error(error);
     }
 }
+
 function decreaseSequenz(sequenz: number[], count: number): number[] {
     if (sequenz.length < count) {
         throw new Error("zu wenige Elemente in der Sequenz");
