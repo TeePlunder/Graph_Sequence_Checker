@@ -3,7 +3,7 @@ import chalk from "chalk";
 function check(sequence: number[]) {
     console.log(chalk.blue('Hello world!'));
     let sortedsequence = sortsequence(sequence)
-    const originalArray = sortedsequence.slice()
+    const originalArray = [...sortedsequence]
 
     let iterationCounter = 1;
     try {
@@ -31,7 +31,7 @@ function decreasesequence(sequence: number[], count: number): number[] {
         throw new Error("zu wenige Elemente in der sequence");
     }
     const decreaseValue = 1;
-    const originalsequence = sequence.slice()
+    const originalsequence = [...sequence]
     console.log("\n-- Verringerung wird gestartet --");
 
     console.log(`Squenz vor der Verringerung: (${originalsequence})`);
