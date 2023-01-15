@@ -1,23 +1,23 @@
 import chalk from "chalk";
 
-function check(sequenz: number[]) {
+function check(sequence: number[]) {
     console.log(chalk.blue('Hello world!'));
-    let sortedSequenz = sortSequenz(sequenz)
-    const originalArray = sortedSequenz.slice()
+    let sortedsequence = sortsequence(sequence)
+    const originalArray = sortedsequence.slice()
 
     let iterationCounter = 1;
     try {
-        while (!sortedSequenz.every((element) => element === 0)) {
+        while (!sortedsequence.every((element) => element === 0)) {
             console.log("------");
             console.log(`Iteration: ${iterationCounter}`);
-            console.log(`Sequenz: (${sortedSequenz})`);
+            console.log(`sequence: (${sortedsequence})`);
 
-            const firstElement = sortedSequenz.shift();
+            const firstElement = sortedsequence.shift();
             if (!firstElement) {
                 break;
             }
-            console.log(`erstes Element ist (${firstElement}) also wird es aus der Sequenz entfernt`)
-            sortedSequenz = decreaseSequenz(sortedSequenz, firstElement)
+            console.log(`erstes Element ist (${firstElement}) also wird es aus der sequence entfernt`)
+            sortedsequence = decreasesequence(sortedsequence, firstElement)
             iterationCounter++
         }
         console.log(`\nBei der Graphfolge: (${originalArray}) handelt es sich um einen Graphen`);
@@ -26,40 +26,47 @@ function check(sequenz: number[]) {
     }
 }
 
-function decreaseSequenz(sequenz: number[], count: number): number[] {
-    if (sequenz.length < count) {
-        throw new Error("zu wenige Elemente in der Sequenz");
+function decreasesequence(sequence: number[], count: number): number[] {
+    if (sequence.length < count) {
+        throw new Error("zu wenige Elemente in der sequence");
     }
     const decreaseValue = 1;
-    const originalSequenz = sequenz.slice()
+    const originalsequence = sequence.slice()
     console.log("\n-- Verringerung wird gestartet --");
 
-    console.log(`Squenz vor der Verringerung: (${originalSequenz})`);
+    console.log(`Squenz vor der Verringerung: (${originalsequence})`);
     console.log(`es sollen die ersten ${count} Elemente um ${decreaseValue} verringert werden.`);
 
     let changesNumbers: number[] = []
+    let untouchedNumbers: number[] = originalsequence.slice(count,originalsequence.length)
     for (let i = 0; i < count; i++) {
-        const currentNumber = sequenz[i];
+        const currentNumber = sequence[i];
         const reducedElement = currentNumber - decreaseValue
         if (reducedElement < 0) {
             const errorMsg = `Element: (${reducedElement}) ist kleiner als 0 => somit kann es sich nicht mehr um einen Graphen handeln.`
             throw new Error(errorMsg);
         }
         changesNumbers.push(currentNumber);
-        sequenz[i] = reducedElement
+        sequence[i] = reducedElement
     }
+    console.log(`original: ${originalsequence}`)
+    console.log(`nicht verwendete nummern: ${chalk.green(untouchedNumbers)}`)
     console.log(`=> folgende Elemente (${changesNumbers}) wurden um ${decreaseValue} verringert`);
-    console.log(`Nicht behandelte Elemente werden nun zu der Sequenz hinzugefügt.`);
-    console.log(`die neue Sequenz ist nun: (${sequenz})`);
+    console.log(`Nicht behandelte Elemente werden nun zu der sequence hinzugefügt.`);
+    console.log(`die neue sequence ist nun: (${sequence})`);
 
-    sequenz = sortSequenz(sequenz)
-    console.log(`Sequenz wird Sortiert: (${sequenz})`);
+    sequence = sortsequence(sequence)
+    console.log(`sequence wird Sortiert: (${sequence})`);
 
-    return sequenz
+    return sequence
 }
 
-function sortSequenz(sequenz: number[]): number[] {
-    return sequenz.sort((a, b) => b - a)
+function colorSequence(sequence: number[]) {
+    return sequence
+} 
+
+function sortsequence(sequence: number[]): number[] {
+    return sequence.sort((a, b) => b - a)
 }
 
 // console.log("\n------ VERSUCH 1 ------\n");
