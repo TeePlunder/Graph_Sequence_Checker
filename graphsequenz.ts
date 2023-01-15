@@ -2,7 +2,7 @@ import chalk from "chalk";
 
 function check(sequence: number[]) {
     console.log(chalk.blue('Hello world!'));
-    let sortedsequence = sortsequence(sequence)
+    let sortedsequence = sortSequence(sequence)
     const originalArray = [...sortedsequence]
 
     let iterationCounter = 1;
@@ -49,13 +49,12 @@ function decreasesequence(sequence: number[], count: number): number[] {
         changesNumbers.push(currentNumber);
         sequence[i] = reducedElement
     }
-    console.log(`original: ${originalsequence}`)
     console.log(`nicht verwendete nummern: ${chalk.green(untouchedNumbers)}`)
     console.log(`=> folgende Elemente (${changesNumbers}) wurden um ${decreaseValue} verringert`);
     console.log(`Nicht behandelte Elemente werden nun zu der sequence hinzugefügt.`);
     console.log(`die neue sequence ist nun: (${sequence})`);
 
-    sequence = sortsequence(sequence)
+    sequence = sortSequence(sequence)
     console.log(`sequence wird Sortiert: (${sequence})`);
 
     return sequence
@@ -65,7 +64,7 @@ function colorSequence(sequence: number[]) {
     return sequence
 } 
 
-function sortsequence(sequence: number[]): number[] {
+function sortSequence(sequence: number[]): number[] {
     return sequence.sort((a, b) => b - a)
 }
 
@@ -73,5 +72,12 @@ function sortsequence(sequence: number[]): number[] {
 // check([6, 6, 6, 5, 5, 2, 2, 1, 1]);
 // console.log("\n------ VERSUCH 2 ------\n");
 // check([11, 11, 9, 9, 7, 5, 5, 5, 5, 4, 4, 3, 3, 2, 2, 2, 2]);
-console.log("\n------ VERSUCH 3 ------\n");
+// console.log("\n------ VERSUCH 3 ------\n");
+const startTime = performance.now()
+
 check([5, 5, 4, 4, 4, 4, 4, 4]);
+
+const endTime = performance.now()
+
+const duration = endTime - startTime;
+console.log(`Call to graph sequence checker took ${Math.round((duration + Number.EPSILON) * 100) / 100} milliseconds`)
